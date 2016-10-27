@@ -1,0 +1,90 @@
+# Disable MOTD/last login message
+touch ~/.hushlogin
+
+########## Setup profile directorires
+# Simple fun() to create a directory then
+# export the path a var
+export_and_mkdir() {
+  VAR=$1
+  DIR=$2
+  export $VAR=$DIR
+  mkdir -p $DIR
+}
+
+# XDG really helps keep your directory structure clean!
+# I use it for almost everything
+#
+#   https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
+#   https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+export_and_mkdir  XDG_CONFIG_HOME "$HOME/.config"
+export_and_mkdir  XDG_CACHE_HOME  "$HOME/.cache"
+export_and_mkdir  XDG_DATA_HOME   "$HOME/.local"
+export_and_mkdir  RBENV_ROOT      "$XDG_CACHE_HOME/rbenv"
+export_and_mkdir  ADOTDIR         "$XDG_CACHE_HOME/antigen"
+
+
+########## Antigen, zsh plugin manager
+source $(brew --prefix)/share/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.p
+antigen use oh-my-zsh
+
+antigen_bundles=(
+  'git'
+  'rbenv'
+  'gnu-utils'
+  'rbenv'
+  'knife'
+  'knife_ssh'
+)
+
+for bundle in $antigen_bundles; do
+  antigen bundle $bundle
+done
+
+# Theme
+antigen theme agnoster/agnoster-zsh-theme agnoster
+
+# This has to be last installed plugin
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Tell antigen that you're done
+antigen apply
+
+########## rbenv
+eval "$(rbenv init -)"
+echo 2.3.1 > ~/.ruby-version
+
+export CHEF_USER=nelson
+export EDITOR=vim
+export DEFAULT_USER=nelson
+
+# Update stuff
+alias update-brew='brew update -v && brew upgrade -v && brew cleanup && brew cask cleanup && brew prune'
+alias update-osx='softwareupdate --install --all --verbose'
+alias update-antigen='antigen update'
+
+# misc
+alias n='nvim ~/.local/notes.md'
+
+# Bundle
+alias be='bundle exec'
+
+# Vagrant
+alias vd='vagrant destroy -f'
+alias vu='vagrant up'
+alias vp='vagrant provision'
+alias vs='vagrant ssh'
+alias kb='be rake server:kickberks'
+
+# Vagrant combos!
+alias kbvu='kb && vd || true && vu '
+alias kbvp='kb && vp'
+
+if [ -e ~/src ] ; then
+  if [ -e ~/src/chef ] ; then
+    cd ~/src/chef
+  else
+    cd ~/src
+  fi
+fi
