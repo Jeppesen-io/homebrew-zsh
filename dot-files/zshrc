@@ -27,6 +27,7 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 # Theme
+POWERLEVEL9K_MODE='awesome-patched'
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
