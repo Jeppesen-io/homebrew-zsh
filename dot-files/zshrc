@@ -22,34 +22,17 @@ export_and_mkdir  XDG_DATA_HOME   "$HOME/.local"
 export_and_mkdir  RBENV_ROOT      "$XDG_CACHE_HOME/rbenv"
 export_and_mkdir  ADOTDIR         "$XDG_CACHE_HOME/antigen"
 
-
-########## Antigen, zsh plugin manager
-source $(brew --prefix)/share/antigen/antigen.zsh
-
-# Load the oh-my-zsh's library.p
-antigen use oh-my-zsh
-
-antigen_bundles=(
-  'git'
-  'rbenv'
-  'gnu-utils'
-  'rbenv'
-  'knife'
-  'knife_ssh'
-)
-
-for bundle in $antigen_bundles; do
-  antigen bundle $bundle
-done
+# Use zplug, installed from brew
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 # Theme
-antigen theme agnoster/agnoster-zsh-theme agnoster
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 
-# This has to be last installed plugin
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Tell antigen that you're done
-antigen apply
+# Tell zplug that you're done
+zplug load > /dev/null
 
 ########## rbenv
 eval "$(rbenv init -)"
@@ -62,7 +45,6 @@ export DEFAULT_USER=nelson
 # Update stuff
 alias update-brew='brew update -v && brew upgrade -v && brew cleanup && brew cask cleanup && brew prune'
 alias update-osx='softwareupdate --install --all --verbose'
-alias update-antigen='antigen update'
 
 # misc
 alias n='nvim ~/.local/notes.md'

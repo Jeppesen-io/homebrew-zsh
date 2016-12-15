@@ -2,13 +2,13 @@ class MyZsh < Formula
   desc 'Install Jeppesens zsh'
   url 'https://github.com/Jeppesen-io/homebrew-zsh/archive/master.zip'
   homepage 'https://github.com/Jeppesen-io/homebrew-zsh'
-  version '1.3.1'
+  version '1.4.0'
 
   bottle :unneeded
 
-  depends_on 'antigen'
   depends_on 'git'
   depends_on 'zsh'
+  depends_on 'zplug'
 
   def install
 
