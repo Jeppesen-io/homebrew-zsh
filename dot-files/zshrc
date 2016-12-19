@@ -26,14 +26,26 @@ export_and_mkdir  ADOTDIR         "$XDG_CACHE_HOME/antigen"
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+# zsh plugins
+zplug "lib/history", from:oh-my-zsh
+
 # Theme
 POWERLEVEL9K_MODE='awesome-patched'
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        zplug clear
+        echo; zplug install
+    fi
+fi
+
 # Tell zplug that you're done
-zplug load > /dev/null
+zplug load >> /dev/null
 
 ########## rbenv
 eval "$(rbenv init -)"
