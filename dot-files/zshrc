@@ -18,38 +18,41 @@ export_and_mkdir() {
 #   https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export_and_mkdir  XDG_CONFIG_HOME "$HOME/.config"
 export_and_mkdir  XDG_CACHE_HOME  "$HOME/.cache"
-export_and_mkdir  XDG_DATA_HOME   "$HOME/.local"
+export_and_mkdir  XDG_DATA_HOME   "$HOME/.local/share"
 export_and_mkdir  RBENV_ROOT      "$XDG_CACHE_HOME/rbenv"
-export_and_mkdir  ADOTDIR         "$XDG_CACHE_HOME/antigen"
 
-# Use zplug, installed from brew
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+## Command history configuration
+if [ -z "$HISTFILE" ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
 
-# zsh plugins
-zplug "lib/history", from:oh-my-zsh
+HISTSIZE=10000
+SAVEHIST=10000
 
-# Theme
-POWERLEVEL9K_MODE='awesome-patched'
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
+# The only theme you need!
+# Install directly because I found ZSH plugin managers too slow
+export POWERLEVEL9K_MODE='awesome-patched'
 export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        zplug clear
-        echo; zplug install
-    fi
+powerlevel9k_home=$XDG_CACHE_HOME/powerlevel9k
+if [ ! -d $powerlevel9k_home ] ; then
+ git clone https://github.com/bhilburn/powerlevel9k.git $powerlevel9k_home
 fi
-
-# Tell zplug that you're done
-zplug load >> /dev/null
+source  $powerlevel9k_home/powerlevel9k.zsh-theme
 
 ########## rbenv
 eval "$(rbenv init -)"
-echo 2.3.1 > ~/.ruby-version
+#echo 2.4.0 > ~/.ruby-version
 
 export CHEF_USER=nelson
 export EDITOR=vim
@@ -84,28 +87,3 @@ if [ -e ~/src ] ; then
   fi
 fi
 
-
-function  tabc() {
-  NAME=$1; if [ -z "$NAME" ]; then NAME="Default"; fi
-  # if you have trouble with this, change
-  # "Default" to the name of your default theme
-  echo -e "\033]50;SetProfile=$NAME\a"
-}
-
-function tab-reset() {
-    NAME="Default"
-    echo -e "\033]50;SetProfile=$NAME\a"
-}
-
-function colorssh() {
-    if [[ -n "$ITERM_SESSION_ID" ]]; then
-        trap "tab-reset" INT EXIT
-        tabc SSH
-    fi
-    ssh $*
-}
-compdef _ssh tabc=ssh
-
-alias ssh="colorssh"
-
-tab-reset
