@@ -1,7 +1,3 @@
-########## rbenv
-eval "$(rbenv init -)"
-#echo 2.4.0 > ~/.ruby-version
-
 export CHEF_USER=nelson
 export EDITOR=vim
 export DEFAULT_USER=nelson
@@ -37,4 +33,3 @@ fi
 
 # Disable MOTD/last login message
 touch ~/.hushlogin
-

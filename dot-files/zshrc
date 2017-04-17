@@ -17,10 +17,10 @@ export_and_mkdir() {
 export_and_mkdir  XDG_CONFIG_HOME "$HOME/.config"
 export_and_mkdir  XDG_CACHE_HOME  "$HOME/.cache"
 export_and_mkdir  XDG_DATA_HOME   "$HOME/.local/share"
-export_and_mkdir  RBENV_ROOT      "$XDG_CACHE_HOME/rbenv"
 export_and_mkdir  ZSH_CACHE_HOME  "$XDG_CACHE_HOME/zsh"
 
-
+# Hold all my real settings in Github under the plugin dir
+# Clone if the directory is missing
 jeppesen_home=$ZSH_CACHE_HOME/jeppesen
 if [ ! -d $jeppesen_home ] ; then
  git clone https://github.com/jeppesen-io/homebrew-zsh.git $jeppesen_home
@@ -30,4 +30,5 @@ for plugin in $jeppesen_home/plugins/*.zsh; do
   source $plugin
 done
 
+# Delete the cache and it'll pull the latest from Git
 alias delete_zsh_cache='rm -rf $ZSH_CACHE_HOME'
