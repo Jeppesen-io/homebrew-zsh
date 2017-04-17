@@ -1,10 +1,6 @@
-
-########## Setup profile directorires
-# Simple fun() to create a directory then
-# export the path a var
+# Simple fun() to create a directory then export the path a var
 export_and_mkdir() {
-  VAR=$1
-  DIR=$2
+  VAR=$1;DIR=$2
   export $VAR=$DIR
   mkdir -p $DIR
 }
