@@ -1,7 +1,3 @@
-export CHEF_USER=nelson
-export EDITOR=vim
-export DEFAULT_USER=nelson
-
 # Update stuff
 alias update-brew='brew update -v && brew upgrade -v && brew cleanup && brew cask cleanup && brew prune'
 alias update-osx='softwareupdate --install --all --verbose'
