@@ -1,3 +1,5 @@
 export CHEF_USER=nelson
-export EDITOR=nvim
+export EDITOR=vim
 export DEFAULT_USER=nelson
+
+bindkey -e
