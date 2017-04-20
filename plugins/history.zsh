@@ -1,6 +1,6 @@
 ## Command history configuration
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$ZSH_CACHE_HOME/history
+    HISTFILE=$ZSH_DATA_HOME/history
 fi
 
 HISTSIZE=10000
