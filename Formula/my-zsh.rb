@@ -2,7 +2,7 @@ class MyZsh < Formula
   desc 'Install Jeppesens zsh'
   url 'https://github.com/Jeppesen-io/homebrew-zsh/archive/master.zip'
   homepage 'https://github.com/Jeppesen-io/homebrew-zsh'
-  version '1.6.4'
+  version '1.7'
 
   bottle :unneeded
 

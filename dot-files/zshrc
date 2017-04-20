@@ -19,7 +19,7 @@ export_and_mkdir  ZSH_CACHE_HOME  "$XDG_CACHE_HOME/zsh"
 # Clone if the directory is missing
 jeppesen_home=$ZSH_CACHE_HOME/jeppesen
 if [ ! -d $jeppesen_home ] ; then
- git clone https://github.com/jeppesen-io/homebrew-zsh.git $jeppesen_home
+ git clone --depth 1 https://github.com/jeppesen-io/homebrew-zsh.git $jeppesen_home
 fi
 
 for plugin in $jeppesen_home/plugins/*.zsh; do
