@@ -1,3 +1,8 @@
+# Basic vars to install the plugin
+local plugin_name='powerlevel9k'
+local plugin_git='https://github.com/bhilburn/powerlevel9k.git'
+local plugin_init="$plugin_name.zsh-theme"
+
 # The only theme you need!
 export POWERLEVEL9K_MODE='awesome-patched'
 export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -20,11 +25,15 @@ prompt_spotify_song () {
   fi
 }
 
+
 # Install directly because I found ZSH plugin managers too slow
 # Loading now takes under 100ms
-powerlevel9k_home=$ZSH_CACHE_HOME/powerlevel9k
-if [ ! -d $powerlevel9k_home ] ; then
- git clone https://github.com/bhilburn/powerlevel9k.git $powerlevel9k_home
+
+
+local plugin_home="$ZSH_CACHE_HOME/$plugin_name"
+
+if [ ! -d $plugin_home ] ; then
+ git clone $plugin_git $plugin_home
 fi
 
-source  $powerlevel9k_home/powerlevel9k.zsh-theme
+source  $plugin_home/$plugin_init
