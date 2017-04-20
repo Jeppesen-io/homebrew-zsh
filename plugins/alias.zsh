@@ -18,14 +18,3 @@ alias kb='be rake server:kickberks'
 # Vagrant combos!
 alias kbvu='kb && vd || true && vu '
 alias kbvp='kb && vp'
-
-if [ -e ~/src ] ; then
-  if [ -e ~/src/chef ] ; then
-    cd ~/src/chef
-  else
-    cd ~/src
-  fi
-fi
-
-# Disable MOTD/last login message
-touch ~/.hushlogin
