@@ -6,7 +6,7 @@ local plugin_init="$plugin_name.zsh"
 
 local plugin_home="$ZSH_CACHE_HOME/$plugin_name"
 
-if [ ! -d $plugin_home_home ] ; then
+if [ ! -d $plugin_home ] ; then
  git clone $plugin_git $plugin_home
 fi
 
