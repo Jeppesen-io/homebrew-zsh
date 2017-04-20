@@ -4,8 +4,8 @@
 #
 export POWERLEVEL9K_MODE='awesome-patched'
 export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(todo context dir vcs status)
-export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(spotifySong load)
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs status)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(spotifySong todo load)
 
 prompt_spotifySong () {
   state=`osascript -e 'tell application "Spotify" to player state as string'`;
