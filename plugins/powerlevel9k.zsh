@@ -4,9 +4,12 @@
 #
 export POWERLEVEL9K_MODE='awesome-patched'
 export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+export POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
+export POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX='$ '
 export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs status)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(spotifySong todo load)
 
+# Show the Spotify artist and track playing
 prompt_spotifySong () {
   state=`osascript -e 'tell application "Spotify" to player state as string'`;
   if [ $state = "playing" ]; then
