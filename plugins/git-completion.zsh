@@ -10,4 +10,5 @@ if [ ! -d $plugin_home ] ; then
  git clone --depth 1 $plugin_git $plugin_home
 fi
 
-source  $plugin_home/contrib/completion/$plugin_name.zsh
+# Cant figure out zsh verions :(
+source $plugin_home/contrib/completion/$plugin_name.bash 2>> /dev/null
