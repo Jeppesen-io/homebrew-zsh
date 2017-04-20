@@ -3,6 +3,10 @@ local plugin_name='powerlevel9k'
 local plugin_git='https://github.com/bhilburn/powerlevel9k.git'
 local plugin_init="$plugin_name.zsh-theme"
 
+# Fire on last cmd failure!
+export POWERLEVEL9K_FAIL_ICON=🔥
+export POWERLEVEL9K_STATUS_VERBOSE=false
+
 # The only theme you need!
 export POWERLEVEL9K_MODE='awesome-patched'
 export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
