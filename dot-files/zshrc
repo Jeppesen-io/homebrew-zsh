@@ -1,30 +1,31 @@
 # Simple fun() to create a directory then export the path a var
-export_and_mkdir() {
-  VAR=$1;DIR=$2
-  export $VAR=$DIR
-  mkdir -p $DIR
-}
+export_and_mkdir() { VAR=$1;DIR=$2;export $VAR=$DIR;mkdir -p $DIR }
 
-# XDG really helps keep your directory structure clean!
-# I use it for almost everything
-#
-#   https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
 #   https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-export_and_mkdir  XDG_CONFIG_HOME "$HOME/.config"
-export_and_mkdir  XDG_CACHE_HOME  "$HOME/.cache"
-export_and_mkdir  XDG_DATA_HOME   "$HOME/.local/share"
-export_and_mkdir  ZSH_CACHE_HOME  "$XDG_CACHE_HOME/zsh"
+export_and_mkdir  XDG_CONFIG_HOME  "$HOME/.config"
+export_and_mkdir  XDG_CACHE_HOME   "$HOME/.cache"
+export_and_mkdir  XDG_DATA_HOME    "$HOME/.local/share"
+
+# Lets setup all the zsh working dirs
+export_and_mkdir  ZSH_CONFIG_HOME  "$XDG_CONFIG_HOME/zsh"
+export_and_mkdir  ZSH_DATA_HOME    "$XDG_DATA_HOME/zsh"
+export_and_mkdir  ZSH_CACHE_HOME   "$XDG_CACHE_HOME/zsh"
 
 # Hold all my real settings in Github under the plugin dir
 # Clone if the directory is missing
-jeppesen_home=$ZSH_CACHE_HOME/jeppesen
-if [ ! -d $jeppesen_home ] ; then
- git clone --depth 1 https://github.com/jeppesen-io/homebrew-zsh.git $jeppesen_home
-fi
+function () {
+  local plugin_name='homebrew-zsh'
+  local plugin_git='https://github.com/jeppesen-io/homebrew-zsh.git'
+  local plugin_home="$ZSH_CACHE_HOME/$plugin_name"
 
-for plugin in $jeppesen_home/plugins/*.zsh; do
-  source $plugin
-done
+  if [ ! -d $plugin_home ] ; then
+    git clone --depth 1 $plugin_git $plugin_home
+  fi
+
+  for plugin in $plugin_home/plugins/*.zsh; do
+    source $plugin
+  done
+}
 
 # Delete the cache and it'll pull the latest from Git
 alias delete_zsh_cache='rm -rf $ZSH_CACHE_HOME'
