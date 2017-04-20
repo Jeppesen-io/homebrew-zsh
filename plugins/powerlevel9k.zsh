@@ -1,8 +1,8 @@
 # The only theme you need!
 # Install directly because I found ZSH plugin managers too slow
 export POWERLEVEL9K_MODE='awesome-patched'
-export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(todo context dir vcs)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status load)
 
 powerlevel9k_home=$ZSH_CACHE_HOME/powerlevel9k
 if [ ! -d $powerlevel9k_home ] ; then
