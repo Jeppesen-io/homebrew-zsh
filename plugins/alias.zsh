@@ -2,8 +2,8 @@
 alias update-brew='brew update -v && brew upgrade -v && brew cleanup && brew cask cleanup && brew prune'
 alias update-osx='softwareupdate --install --all --verbose'
 
-# misc
-alias n='nvim ~/.local/notes.md'
+# Open my default node in https://github.com/xolox/vim-notes:
+alias n='vim note:default'
 
 # Bundle
 alias be='bundle exec'
