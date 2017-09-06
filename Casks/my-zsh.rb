@@ -1,6 +1,6 @@
 cask 'my-zsh' do
 
-  version '1.0.2'
+  version '1.0.3'
   url 'https://github.com/Jeppesen-io/homebrew-zsh/archive/master.zip'
   homepage 'https://github.com/Jeppesen-io/homebrew-zsh'
   sha256 :no_check
@@ -15,6 +15,7 @@ cask 'my-zsh' do
 
   postflight do
 
+    `sudo sh -c echo /usr/local/bin/zsh > /etc/shells`
     `chsh -s /usr/local/bin/zsh`
 
   end
