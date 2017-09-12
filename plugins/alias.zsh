@@ -6,4 +6,4 @@ alias update-brew='brew update -v && brew upgrade -v && brew cleanup && brew cas
 alias update-osx='softwareupdate --install --all --verbose'
 
 # Delete the cache and it'll pull the latest from Git
-alias update-zsh-plugins='rm -rf $ZSH_CACHE_HOME;zsh'
+alias update-zsh-plugins='rm -rfv $ZSH_CACHE_HOME;zsh'
