@@ -28,4 +28,4 @@ function () {
 }
 
 # Delete the cache and it'll pull the latest from Git
-alias delete_zsh_cache='rm -rf $ZSH_CACHE_HOME'
+alias update-zsh-plugins='rm -rf $ZSH_CACHE_HOME'
