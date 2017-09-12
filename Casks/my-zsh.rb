@@ -1,6 +1,6 @@
 cask 'my-zsh' do
 
-  version '1.2'
+  version '1.3'
   url 'https://github.com/Jeppesen-io/homebrew-zsh/archive/master.zip'
   homepage 'https://github.com/Jeppesen-io/homebrew-zsh'
   sha256 :no_check
